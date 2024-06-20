@@ -13,10 +13,16 @@ szyfr(Kod) :-
     A is D + E,
     B is 2 * F,
     C mod 5 =\= 0,
-    member(D, [2, 3, 5, 7]),
+    D is 1,
     F is H - 2,
     G mod 3 =:= 0,
     H is 2 * A,
     I is H - 1.
+
+assign_digits([], _).
+assign_digits([D|Ds], List):-
+    select(D, List, NewList),
+    assign_digits(Ds, NewList).
+
 
 

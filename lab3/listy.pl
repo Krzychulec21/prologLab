@@ -33,6 +33,8 @@ middle([_|T], Result) :-
     reverse(T, [_|Reversed]),
     reverse(Reversed, Result).
 
+
+
 split([],[],[]).
 split([X], [X], []).
 split([X, Y | Rest], [X|L1], [Y | L2]) :-
@@ -58,3 +60,29 @@ middle(N, L, R) :-
 
 move([H|T], R) :-
     append(T, [H], R).
+
+listSum([X], X).
+listSum([X,Y|T], Sum) :-
+    Z is X + Y,
+    listSum([Z|T], Sum).
+
+sum(X) :-
+    numlist(1,100,L1),
+    maplist(f,L1,L2),
+    listSum(L2,X).
+
+f(X,Y) :-
+    Y is 1/X.
+
+listProd([X], X).
+listProd([X,Y|T], Prod) :-
+    Z is X * Y,
+    listSum([Z|T], Prod).
+
+prod(X) :-
+    numlist(1,50,L1),
+    maplist(f2,L1,L2),
+    listSum(L2,X).
+
+f2(X,Y) :-
+    Y is (1+X)/(2+X).
