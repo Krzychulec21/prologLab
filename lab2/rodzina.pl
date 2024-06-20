@@ -55,22 +55,35 @@ rodzina(X, Y, Z1, Z2) :-
     rodzic(Y, Z2),
     Z1 \= Z2.
 
+
 rodzice(X) :-
-    rodzic(Y, X),
-    (  mezczyzna(Y)
-    -> write('ojciec: '), write(Y), nl
-    ;  kobieta(Y)
-    -> write('matka: '), write(Y), nl
-    ),
-    fail.
+  ojciec(O,X),
+  matka(M,X),
+  write("ojciec: "),
+  writeln(O),
+  write("matka: "),
+  writeln(M),
+  !.
+
+rodzice(X) :-
+  ojciec(O,X),
+  write("ojciec: "),
+  writeln(O),
+  !.
+
+rodzice(X) :-
+  matka(M,X),
+  write("matka: "),
+  writeln(M),
+  !.
+
 rodzice(_) :-
-    write('brak danych'), nl.
+  write("brak danych").
 
+potomek(X,Y) :-
+  rodzic(Y,X).
 
-potomek(X, Y) :-
-  rodzic(Y, X).
-
-potomek(X,Y) :- 
+potomek(X,Y) :-
   rodzic(Z,X),
   potomek(Z,Y).
 
@@ -78,6 +91,7 @@ potomkowie(X) :-
   potomek(Y, X),
   write(Y), nl,
   fail.
+
 potomkowie(_).
 
   

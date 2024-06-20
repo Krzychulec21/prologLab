@@ -16,15 +16,11 @@ trojmian(A, B, C, Wynik) :-
   Delta =:= 0,
   Wynik is -B / (2 * A).
 
-seq(1,3).
-seq(2,4).
-seq(N,W) :-
-    N > 2,
-    N1 is N - 1,
-    N2 is N - 2,
-    seq(N1, W1),
-    seq(N2, W2),
-    W is W1 + 3 * W2.
+trojmian(A, B, C, _) :-
+  delta(A, B, C, Delta),
+  Delta < 0,
+  write("Brak rozwiazan").
+
 
 liczba(X) :-
   between(100, 999, X),
@@ -51,3 +47,21 @@ znajdz_liczby(L1, L2) :-
   zamiana_cyfr(L1, L2),
   L1 + L2 =:= 1187.
 
+
+znajdz(L1,L2) :-
+member(A, [1,2,3,4,5,6,7,8,9]),
+member(B, [0,1,2,3,4,5,6,7,8,9]),
+member(C, [0,1,2,3,4,5,6,7,8,9]),
+100*A + 10*B + C + 100*A + 10*C + B =:= 1187,
+L1 is 100*A + 10*B + C,
+L2 is 100*A + 10*C + B.
+
+seq(1,3).
+seq(2,4).
+seq(N,W) :-
+  N > 2,
+  N1 is N - 1,
+  N2 is N - 2,
+  seq(N1, R1),
+  seq(N2, R2),
+  W is R1 + 3*R2.
